@@ -3,6 +3,7 @@
   package: name=rsync state=latest
 
 - name: Create backup script
+  become: yes
   template:
     src: remote-backup.sh.j2
     dest: /sbin/remote-backup.sh
@@ -11,6 +12,7 @@
     mode: 0644
 
 - name: Create systemd service
+  become: yes
   template:
     src: remote-backup.service.j2
     dest: /etc/systemd/system/remote-backup.service
@@ -20,6 +22,7 @@
   notify: Systemctl daemon-reload # TODO: actually reload
 
 - name: Create systemd timer
+  become: yes
   template:
     src: remote-backup.timer.j2
     dest: /etc/systemd/system/remote-backup.timer
@@ -29,6 +32,7 @@
   notify: Systemctl daemon-reload
 
 - name: Enable and start remote backup service
+  become: yes
   service:
     name: remote-backup.timer
     enabled: yes
