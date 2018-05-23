@@ -1,0 +1,34 @@
+---
+- name: Install rsync
+  package: name=rsync state=latest
+
+- name: Create backup script
+  template:
+    src: remote-backup.sh.j2
+    dest: /sbin/remote-backup.sh
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create systemd service
+  template:
+    src: remote-backup.service.j2
+    dest: /etc/systemd/system/remote-backup.service
+    owner: root
+    group: root
+    mode: 0664
+  notify: Systemctl daemon-reload # TODO: actually reload
+
+- name: Create systemd timer
+  template:
+    src: remote-backup.timer.j2
+    dest: /etc/systemd/system/remote-backup.timer
+    owner: root
+    group: root
+    mode: 0664
+  notify: Systemctl daemon-reload
+
+- name: Enable and start remote backup service
+  service:
+    name: remote-backup.timer
+    enabled: yes

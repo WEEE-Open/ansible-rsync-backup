@@ -1,0 +1,11 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Remote backup, managed by Ansible
+After=local-fs.target remote-fs.target network.target
+
+[Service]
+Type=simple
+ExecStart=remote-backup.sh
+User={{ remote_backup_local_username }}
+Group={{ remote_backup_local_group }}

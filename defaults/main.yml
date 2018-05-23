@@ -1,0 +1,5 @@
+---
+remote_backup_day: Thu
+remote_backup_time: "16:00:00"
+remote_backup_port: 22
+remote_backup_accuracy: 2h
