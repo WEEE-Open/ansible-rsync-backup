@@ -6,6 +6,6 @@ After=local-fs.target remote-fs.target network.target
 
 [Service]
 Type=simple
-ExecStart=remote-backup.sh
+ExecStart=/sbin/remote-backup.sh
 User={{ remote_backup_local_username }}
 Group={{ remote_backup_local_group }}
