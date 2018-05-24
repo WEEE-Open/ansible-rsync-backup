@@ -1,5 +1,6 @@
 ---
 - name: Install rsync
+  become: yes
   package: name=rsync state=latest
 
 - name: Create backup script
