@@ -10,7 +10,7 @@
     dest: /sbin/remote-backup.sh
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 
 - name: Create systemd service
   become: yes
@@ -19,7 +19,7 @@
     dest: /etc/systemd/system/remote-backup.service
     owner: root
     group: root
-    mode: 0664
+    mode: 0644
   notify:
     - reload systemd
 
@@ -30,7 +30,7 @@
     dest: /etc/systemd/system/remote-backup.timer
     owner: root
     group: root
-    mode: 0664
+    mode: 0644
   notify:
     - reload systemd
 
