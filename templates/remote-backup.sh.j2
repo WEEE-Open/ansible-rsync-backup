@@ -1,7 +1,10 @@
 #!/bin/bash
+
 # {{ ansible_managed }}
 
 {% for path in remote_backup_local_directories %}
-	rsync -arzP --port {{ remote_backup_port }} "{{ path }}" {{ remote_backup_remote_account }}@{{ remote_backup_server }}:{{ remote_backup_remote_directory }}
-	echo $?
+rsync -arzP --port {{ remote_backup_port }} "{{ path }}" {{ remote_backup_remote_account }}@{{ remote_backup_server }}:{{ remote_backup_remote_directory }}
+if [[ $? -ne 0 ]]; then
+	exit $?
+fi
 {% endfor %}
