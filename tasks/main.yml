@@ -20,7 +20,8 @@
     owner: root
     group: root
     mode: 0664
-  notify: Systemctl daemon-reload # TODO: actually reload
+  notify:
+    - reload systemd
 
 - name: Create systemd timer
   become: yes
@@ -30,7 +31,8 @@
     owner: root
     group: root
     mode: 0664
-  notify: Systemctl daemon-reload
+  notify:
+    - reload systemd
 
 - name: Enable and start remote backup service
   become: yes
